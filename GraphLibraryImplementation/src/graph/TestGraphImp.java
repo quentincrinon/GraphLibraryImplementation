@@ -25,14 +25,14 @@ public class TestGraphImp {
 		unOrientedGraph.addEdge(new UndirectedEdge(v1, v2));
 		unOrientedGraph.addEdge(new UndirectedEdge(v4, v5));
 		Vertex[] neighboors = unOrientedGraph.getNeighboors(v1);
-		System.out.println("This graph contains " + unOrientedGraph.getNumberOfVertices() + " and " + unOrientedGraph.getNumberOfEdges() + " edges !\n");
+		System.out.println("This graph contains " + unOrientedGraph.getNumberOfVertices() + " vertices and " + unOrientedGraph.getNumberOfEdges() + " edges !\n");
 		System.out.println("The neighboors of the vertex v1 are :\n");
 		for (Vertex v : neighboors) {
 			if (v != null) {
 				System.out.println("v" + v.getIndice() + "\n");
 			}
 		}
-		System.out.println("Succesful end of the tes !\n");
+		System.out.println("Succesful end of the test !\n");
 		
 		System.out.println("Actualy not able to run tests on an oriented graph because we can't create DirectedEdge objects properly (missing arguments) !\n");
 	}
