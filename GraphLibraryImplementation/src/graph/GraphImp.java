@@ -1,15 +1,17 @@
 package graph;
 
 public class GraphImp implements Graph {
-	private int maxVertices;
+	private Edge[] edges;
 	private int maxEdges;
 	private int edgeCount;
-	private int vertexCount;
-	private Edge[] edges;
 	private Vertex[] vertices;
+	private int maxVertices;
+	private int vertexCount;
 	private int[][] matriceAdj;
+	private boolean oriented;
 	
-	public GraphImp(int maxV, int maxE) {
+	public GraphImp(int maxV, int maxE, boolean oriented) {
+		this.oriented = oriented;
 		this.maxVertices = maxV;
 		this.maxEdges = maxE;
 		this.edgeCount = 0;
@@ -26,7 +28,30 @@ public class GraphImp implements Graph {
 			System.out.println("Already a maximum number of edges in the graph !");
 			return;
 		}
+		else if (this.oriented == true) {
+			if (edge.getClass() != DirectedEdge.class) {
+				System.out.println("Can't add UndirectedEdge to oriented graph !");
+				return;
+			}
+			else {
+				int i;
+				for (i = 0; i < this.edges.length; i++) {
+					if (this.edges[i] == null) {
+						this.edges[i] = edge;
+					}
+				}
+				if (this.matriceAdj[edge.getV1().getIndice()][edge.getV2().getIndice()] == 0) {
+					this.matriceAdj[edge.getV1().getIndice()][edge.getV2().getIndice()] = 1;
+					System.out.println("The edge between v" + edge.getV1().getIndice() + " and v" + edge.getV2().getIndice() + " has been added to the graph !");
+					this.edgeCount++;
+				}
+			}
+		}
 		else {
+			if (edge.getClass() != UndirectedEdge.class) {
+				System.out.println("Can't add DirectedEdge to unoriented graph !\n");
+				return;
+			}
 			int i;
 			for (i = 0; i < this.edges.length; i++) {
 				if (this.edges[i] == null) {
@@ -35,6 +60,7 @@ public class GraphImp implements Graph {
 			}
 			if (this.matriceAdj[edge.getV1().getIndice()][edge.getV2().getIndice()] == 0) {
 				this.matriceAdj[edge.getV1().getIndice()][edge.getV2().getIndice()] = 1;
+				System.out.println("The edge between v" + edge.getV1().getIndice() + " and v" + edge.getV2().getIndice() + " has been added to the graph !");
 				this.edgeCount++;
 			}
 		}
@@ -57,7 +83,7 @@ public class GraphImp implements Graph {
 	@Override
 	public void addVertex(Vertex vertex) {
 		if (this.vertexCount >= this.maxVertices) {
-			System.out.println("Already a maximum number of vertices in the graph !");
+			System.out.println("Already a maximum number of vertices in the graph !\n");
 			return;
 		}
 		else {
