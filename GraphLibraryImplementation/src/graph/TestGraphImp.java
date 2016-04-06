@@ -1,6 +1,16 @@
 package graph;
 
+/**
+ * Main class that make the GraphImp running
+ * @author Johan Brunet, Quentin Crinon
+ *
+ */
+
 public class TestGraphImp {
+	/**
+	 * Main of the application
+	 * @param args some arguments (or none)
+	 */
 
 	public static void main(String[] args) {
 		System.out.println("Starting the test !\n");
