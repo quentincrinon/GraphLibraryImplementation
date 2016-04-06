@@ -7,7 +7,7 @@ public class GraphImp implements Graph {
 	private Vertex[] vertices;
 	private int maxVertices;
 	private int vertexCount;
-	private int[][] matriceAdj;
+	private int[][] adjMatrix;
 	private boolean oriented;
 	
 	public GraphImp(int maxV, int maxE, boolean oriented) {
@@ -18,7 +18,7 @@ public class GraphImp implements Graph {
 		this.vertexCount = 0;
 		this.edges = new Edge[this.maxEdges];
 		this.vertices = new Vertex[this.maxVertices];
-		this.matriceAdj = new int[this.maxVertices][this.maxVertices];
+		this.adjMatrix = new int[this.maxVertices][this.maxVertices];
 		initialiserMatrice();
 	}
 	
@@ -40,8 +40,8 @@ public class GraphImp implements Graph {
 						this.edges[i] = edge;
 					}
 				}
-				if (this.matriceAdj[edge.getV1().getIndice()][edge.getV2().getIndice()] == 0) {
-					this.matriceAdj[edge.getV1().getIndice()][edge.getV2().getIndice()] = 1;
+				if (this.adjMatrix[edge.getV1().getIndice()][edge.getV2().getIndice()] == 0) {
+					this.adjMatrix[edge.getV1().getIndice()][edge.getV2().getIndice()] = 1;
 					System.out.println("The edge between v" + edge.getV1().getIndice() + " and v" + edge.getV2().getIndice() + " has been added to the graph !");
 					this.edgeCount++;
 				}
@@ -58,8 +58,8 @@ public class GraphImp implements Graph {
 					this.edges[i] = edge;
 				}
 			}
-			if (this.matriceAdj[edge.getV1().getIndice()][edge.getV2().getIndice()] == 0) {
-				this.matriceAdj[edge.getV1().getIndice()][edge.getV2().getIndice()] = 1;
+			if (this.adjMatrix[edge.getV1().getIndice()][edge.getV2().getIndice()] == 0) {
+				this.adjMatrix[edge.getV1().getIndice()][edge.getV2().getIndice()] = 1;
 				System.out.println("The edge between v" + edge.getV1().getIndice() + " and v" + edge.getV2().getIndice() + " has been added to the graph !");
 				this.edgeCount++;
 			}
@@ -75,7 +75,7 @@ public class GraphImp implements Graph {
 		int i,j;
 		for (i = 0; i < this.maxVertices; i++) {
 			for (j = 0; j < this.maxVertices; j++) {
-				this.matriceAdj[i][j] = 0;
+				this.adjMatrix[i][j] = 0;
 			}
 		}
 	}
@@ -121,8 +121,8 @@ public class GraphImp implements Graph {
 		Vertex[] neighboors = new Vertex[maxVertices];
 		int i;
 		int j = 0;
-		for (i = 0; i < this.matriceAdj.length; i++) {
-			if (this.matriceAdj[vertex.getIndice()][i] == 1) {
+		for (i = 0; i < this.adjMatrix.length; i++) {
+			if (this.adjMatrix[vertex.getIndice()][i] == 1) {
 				neighboors[j] = this.vertices[i];
 				j++;
 			}
